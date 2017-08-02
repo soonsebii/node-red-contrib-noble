@@ -45,6 +45,7 @@ module.exports = function(RED) {
         noble.on('discover', function(peripheral) {
             var msg = { payload:{peripheralUuid:peripheral.uuid, localName: peripheral.advertisement.localName} };
             msg.peripheralUuid = peripheral.uuid;
+            msg.address = peripheral.address;
             msg.localName = peripheral.advertisement.localName;
             msg.detectedAt = new Date().getTime();
             msg.detectedBy = machineId;
