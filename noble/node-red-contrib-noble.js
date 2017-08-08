@@ -24,6 +24,7 @@ module.exports = function(RED) {
     "use strict";
 
     var noble = require('noble');
+    var dateformat = require('dateformat');
     var os = require('os');
     
     // The main node definition - most things happen in here
@@ -51,6 +52,7 @@ module.exports = function(RED) {
             msg.detectedBy = machineId;
             msg.advertisement = peripheral.advertisement;
             msg.rssi = peripheral.rssi;
+            msg.timestamp = dateformat(new Date(), "isoUtcDateTime");
 
             // Check the BLE follows iBeacon spec
             if (peripheral.manufacturerData) {
