@@ -4,7 +4,7 @@
   "description": "A Node-RED node that uses Noble to interact with BLEs",
   "dependencies": {
     "dateformat": "^2.0.0",
-    "noble": "^1.7.0"
+    "noble": "git+https://github.com/soonsebii/noble.git"
   },
   "repository": {
     "type": "git",

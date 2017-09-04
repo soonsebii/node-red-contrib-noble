@@ -23,7 +23,7 @@
 module.exports = function(RED) {
     "use strict";
 
-    var noble = require('noble');
+    var Noble = require('noble');
     var dateformat = require('dateformat');
     var os = require('os');
     
@@ -31,6 +31,8 @@ module.exports = function(RED) {
     function NobleScan(n) {
         // Create a RED node
         RED.nodes.createNode(this,n);
+
+        var noble = new Noble(parseInt(n.deviceId, 10));
 
         // Store local copies of the node configuration (as defined in the .html)
         this.duplicates = n.duplicates;
@@ -48,8 +50,7 @@ module.exports = function(RED) {
             msg.peripheralUuid = peripheral.uuid;
             msg.address = peripheral.address;
             msg.localName = peripheral.advertisement.localName;
-            msg.detectedAt = new Date().getTime();
-            msg.detectedBy = machineId;
+            msg.detectedBy = peripheral._noble.address;
             msg.advertisement = peripheral.advertisement;
             msg.rssi = peripheral.rssi;
             msg.timestamp = dateformat(new Date(), "isoUtcDateTime");
